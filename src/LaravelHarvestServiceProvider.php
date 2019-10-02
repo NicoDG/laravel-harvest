@@ -3,6 +3,7 @@
 namespace Byte5\LaravelHarvest;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class LaravelHarvestServiceProvider extends ServiceProvider
 {
@@ -68,7 +69,7 @@ class LaravelHarvestServiceProvider extends ServiceProvider
     {
         collect($this->migrationNames)->each(function ($migrationName) {
             if (! class_exists($migrationName)) {
-                $fileName = lcfirst(snake_case($migrationName));
+                $fileName = lcfirst(Str::snake($migrationName));
 
                 $this->publishes([
                     __DIR__.'/../database/migrations/'.$fileName.'.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_'.$fileName.'.php'),
