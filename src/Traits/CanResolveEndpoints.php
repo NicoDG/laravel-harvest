@@ -2,6 +2,8 @@
 
 namespace Byte5\LaravelHarvest\Traits;
 
+use use \Illuminate\Support\Str;
+
 trait CanResolveEndpoints
 {
     /**
@@ -30,7 +32,7 @@ trait CanResolveEndpoints
     private function getEndpointName($name)
     {
         return collect($this->availableEndpoints)->filter(function ($endpoint) use ($name) {
-            return str_singular(ucfirst($name)) == $endpoint;
+            return Str::singular(ucfirst($name)) == $endpoint;
         })->first();
     }
 
