@@ -2,6 +2,8 @@
 
 namespace Byte5\LaravelHarvest\Traits;
 
+use \Illuminate\Support\Str;
+
 trait HasExternalRelations
 {
     /**
@@ -68,7 +70,7 @@ trait HasExternalRelations
      */
     private function externalRelationIdExists($relation)
     {
-        return $this->{'external_'.snake_case($relation).'_id'} != null;
+        return $this->{'external_'.Str::snake($relation).'_id'} != null;
     }
 
     /**
@@ -79,7 +81,7 @@ trait HasExternalRelations
      */
     private function relationHasNotBeenEstablished($relation)
     {
-        return ! $this->{$relation} || $this->{snake_case($relation).'_id'} == null;
+        return ! $this->{$relation} || $this->{Str::snake($relation).'_id'} == null;
     }
 
     /**
@@ -91,7 +93,7 @@ trait HasExternalRelations
     private function mapRelations($relations, $save)
     {
         $relations->each(function ($relation) use ($save) {
-            $relationId = $this->{'external_'.snake_case($relation).'_id'};
+            $relationId = $this->{'external_'.Str::snake($relation).'_id'};
             $relationKey = $this->getRelationKey($relation);
 
             if ($existingModel = $this->checkForLocalExistence($relationKey, $relationId)) {
