@@ -2,7 +2,7 @@
 
 namespace Byte5\LaravelHarvest\Traits;
 
-use use \Illuminate\Support\Str;
+use \Illuminate\Support\Str;
 
 trait CanResolveEndpoints
 {
